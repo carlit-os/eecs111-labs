@@ -1,9 +1,9 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-beginner-reader.ss" "lang")((modname 01-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname 01-lab-revised) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 (require 2htdp/image)
 
-;; When doing exercises, you can use <Ctrl>-I or command-I to indent your code.
+;; When doing exercises, you can use <Ctrl>-I or command-I or the Tab key to indent your code.
 ;; You can also hit "Check Syntax ✔" to check for any syntax errors and inspect
 ;; how variables are used in the code.
 
@@ -23,7 +23,7 @@
 ;; Exercise 1. Please give an example of a String value,
 ;; an example of a Boolean value and an example of an Image value.
 
-... ; [YOUR CODE HERE]
+ ; [YOUR CODE HERE]
 
 
 ;; Exercise 2. Arithmetic of Values
@@ -56,7 +56,7 @@
 ;; - image-width
 ;; - overlay/xy
 
-... ; [YOUR CODE HERE]
+ ; [YOUR CODE HERE]
 
 
 ;; Exercise 3. Given the definition of x-pos, please fill in an expression in '...'
@@ -64,10 +64,11 @@
 
 (define x-pos 5)
 
+#|
 (check-expect
- ... ; [YOUR CODE HERE]
+ ... 
  #true)
-
+|#
 
 ;; Exercise 4. Given the definition of message, x and y, please fill in an expression
 ;; in '...' to produce the same value using message, x and y.
@@ -76,17 +77,18 @@
 (define y 8)
 (define message "The object is at ")
 
+#|
 (check-expect
- ... ; [YOUR CODE HERE]
+ ... 
  "The object is at (3, 8).")
+|#
 
-
-;; Exercise 5. Define a function compute-area that computes the area of an image.
+;; Exercise 5. Define a function compute-area that computes (maximum) the area of an image.
 ;; Please follow the 5-step design recipe.
 ;; Be sure to require 2htdp/image.
 
-; compute-area : Image -> Number
-... ; [YOUR CODE HERE]
+;; compute-area : Image -> Number
+ ; [YOUR CODE HERE]
 
 
 ;; Exercise 14 from the textbook
@@ -111,8 +113,10 @@
 ; my-overlay : Image -> Image
 ; Places a square of size 40 either on top of the given Image or below the
 ; given image, depending on whether the given Image is wider than the square or not.
+#|
 (check-expect
  (my-overlay (circle 50 "solid" "blue"))
  (overlay (square 40 "solid" "red") (circle 50 "solid" "blue")))
 (define (my-overlay choose-your-own-argument-name-here)
   ...)
+|#
