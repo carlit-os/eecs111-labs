@@ -86,13 +86,13 @@
 ;              "The object is at (3, 8).")
 
 
-;; Exercise 5. Define a function `compute-area` that computes area of an
+;; Exercise 5. Define a function `image-area` that computes area of an
 ;; image's *bounding box*. (The bounding box is the smallest rectangle
 ;; that encloses an image.)
 ;;
 ;; Be sure to follow the Design Recipe.
 
-;; compute-area : Image -> Number
+;; image-area : Image -> Number
 ;; [YOUR CODE HERE]
 
 

@@ -810,7 +810,7 @@
 0 0 -1 -1 0 1 #"\0"
 0 75 6 #"Menlo\0"
 0.0 21 90 -1 90 -1 3 -1 0 1 0 1 0 0 0.0 0.0 0.0 0.0 0.0 0.0 0 0 0 255
-255 255 1 -1           0 1021 0 4 3 85
+255 255 1 -1           0 1020 0 4 3 85
 (
  #";; The first three lines of this file were inserted by DrRacket. The"
  #"y record metadata"
@@ -1520,16 +1520,15 @@
 0 0 24 29 1 #"\n"
 0 0 24 3 14 #"              "
 0 0 19 3 1 #"\""
-0 0 19 3 3 #"The"
-0 0 19 3 22 #" object is at (3, 8).\""
+0 0 19 3 25 #"The object is at (3, 8).\""
 0 0 24 3 1 #")"
 0 0 24 29 1 #"\n"
 0 0 24 29 1 #"\n"
 0 0 24 29 1 #"\n"
-0 0 17 3 72
+0 0 17 3 70
 (
- #";; Exercise 5. Define a function `compute-area` that computes area o"
- #"f an"
+ #";; Exercise 5. Define a function `image-area` that computes area of "
+ #"an"
 ) 0 0 24 29 1 #"\n"
 0 0 17 3 70
 (
@@ -1543,7 +1542,7 @@
 0 0 17 3 39 #";; Be sure to follow the Design Recipe."
 0 0 24 29 1 #"\n"
 0 0 24 29 1 #"\n"
-0 0 17 3 32 #"; compute-area : Image -> Number"
+0 0 17 3 30 #"; image-area : Image -> Number"
 0 0 24 29 1 #"\n"
 0 0 17 3 51 #"; Finds the area of the given image's bounding box."
 0 0 24 29 1 #"\n"
@@ -1558,7 +1557,7 @@
 0 0 24 3 1 #"("
 0 0 15 3 6 #"define"
 0 0 24 3 2 #" ("
-0 0 14 3 12 #"compute-area"
+0 0 14 3 10 #"image-area"
 0 0 24 3 1 #" "
 0 0 14 3 3 #"img"
 0 0 24 3 1 #")"
@@ -1579,7 +1578,7 @@
 0 0 24 3 1 #"("
 0 0 14 3 12 #"check-expect"
 0 0 24 3 2 #" ("
-0 0 14 3 12 #"compute-area"
+0 0 14 3 10 #"image-area"
 0 0 24 3 2 #" ("
 0 0 14 3 9 #"rectangle"
 0 0 24 3 1 #" "
@@ -1597,7 +1596,7 @@
 0 0 24 3 1 #"("
 0 0 14 3 12 #"check-expect"
 0 0 24 3 2 #" ("
-0 0 14 3 12 #"compute-area"
+0 0 14 3 10 #"image-area"
 0 0 24 3 2 #" ("
 0 0 14 3 6 #"circle"
 0 0 24 3 1 #" "
