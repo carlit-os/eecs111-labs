@@ -3,12 +3,14 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART I : Structs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 1. Please design a data definition, Combination, to represent all
+;; Exercise 1. Please design a data definition, named Combination, to represent all
 ;; possible orders of one ravioli filling with one sauce.
 ;;
-;; Please follow the design recipe which includes a description (signature)
-;; of Combination, a define-struct and an interpretation of the fields.
-;; Also write down a template that does structural decomposition of Combination.
+;; Please follow the design recipe which includes:
+;; - a description (signature) of Combination
+;; - a define-struct
+;; - an interpretation of the fields
+;; - and a template that does structural decomposition of Combination.
 ;;
 ;; (See: homework 0 and homework 1
 ;;  - HW0: http://users.eecs.northwestern.edu/~jesse/course/eecs111/hw/0.html
@@ -20,7 +22,7 @@
 
 ;; Exercise 2a. Please design a function, describe-order : Combination -> String,
 ;; that computes a string description of a Combination following the example
-;; format.
+;; format in the check-expect below.
 
 #| [YOUR CODE HERE] |#
 
