@@ -3,18 +3,19 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART I : Structs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 1. Please design a data definition, named Combination, to represent
-;; all possible orders of one ravioli filling with one sauce.
+;; Exercise 1. Please design a new class of data, named Combination, to
+;; represent all possible orders of one ravioli filling with one sauce.
+;; Write a complete data definiton for Combination, which includes:
 ;;
-;; Please follow the design recipe which includes:
-;; - a description (signature) of Combination
-;; - a define-struct
-;; - an interpretation of the fields
-;; - and a template that does structural decomposition of Combination.
+;; - the definition of Combination itself (in a comment),
+;; - a matching define-struct for BSL (not in a comment),
+;; - an interpretation of the fields,
+;; - and a template for structurally decomposing a Combination.
 ;;
-;; (See: homework 0 and homework 1
-;;  - HW0: http://users.eecs.northwestern.edu/~jesse/course/eecs111/hw/0.html
-;;  - HW1: http://users.eecs.northwestern.edu/~jesse/course/eecs111/hw/1.html )
+;; (You may want to refer to Homework 0 for the original problem or
+;; Homework 1 for your definitions of Filling and Sauce:
+;;  - http://users.eecs.northwestern.edu/~jesse/course/eecs111/hw/0.html
+;;  - http://users.eecs.northwestern.edu/~jesse/course/eecs111/hw/1.html )
 
 #| [YOUR CODE HERE] |#
 
