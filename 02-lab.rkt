@@ -5,12 +5,14 @@
 
 ;; Exercise 1. Please design a new class of data, named Combination, to
 ;; represent all possible orders of one ravioli filling with one sauce.
-;; Write a complete data definiton for Combination, which includes:
+;; Write a comprehensive data definiton for Combination, which includes:
 ;;
 ;; - the definition of Combination itself (in a comment),
 ;; - a matching define-struct for BSL (not in a comment),
 ;; - an interpretation of the fields,
-;; - and a template for structurally decomposing a Combination.
+;; - a constant named SQUASHROOM-EXAMPLE defined to be the Combination that
+;;   represents butternut squash filling in wild mushroom sauce, and
+;; - a template for structurally decomposing a Combination.
 ;;
 ;; (You may want to refer to Homework 0 for the original problem or
 ;; Homework 1 for your definitions of Filling and Sauce:
@@ -19,33 +21,36 @@
 
 #| [YOUR CODE HERE] |#
 
+(define SQUASHROOM-EXAMPLE
+  "I'm a String, but I should be replaced with a Combination")
 
 
-;; Exercise 2. Please design a function, describe-order : Combination ->
-;; String, that computes a string description of a Combination following the
-;; example format in the check-expect below.
+;; Exercise 2. Please design a function,
+;;
+;;     describe-order : Combination -> String
+;;
+;; that formats a Combination into a textual description according to
+;; the check-expect below.
 
 #| [YOUR CODE HERE] |#
 
-; (An example and sample test case)
+;; (An example / test case)
 #;
 (check-expect
- (describe-order (make-comb "butternut squash" "wild mushroom"))
- "This order is ravioli with butternut squash filling and wild mushroom sauce.")
-
+ (describe-order SQUASHROOM-EXAMPLE)
+ "Ravioli with butternut squash filling and wild mushroom sauce.")
 
 
 ;; Exercise 3. John loves only cream sauce and no others. Please design a
-;; function john-favorite : Combination -> Combination that change the sauce
-;; of an arbitrary order to "cream".
+;; function john-favorite : Combination -> Combination that changes the sauce
+;; of an arbitrary order to be cream.
 
 #| [YOUR CODE HERE] |#
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART II : cond ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART II : cond ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Exercise 4a. Yesterday, a clerk of Dave’s New Kitchen felt sleepy and
+;; Exercise 4. Yesterday, a clerk of Dave’s New Kitchen felt sleepy and
 ;; accidentally swapped the cream sauce and the wild mushroom sauce. As a
 ;; result, the orders were all wrong. Please design a function
 ;; actual-combination : Combination -> Combination that computes the actual
@@ -58,35 +63,29 @@
 #| [YOUR CODE HERE] |#
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART III : big-bang ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 4b. Evaluate the following expression step by step and write down
-;; next to each step whether it is arithmetic, plugging or cond.
-;;
-;;     (actual-combination (make-comb "butternut squash" "cream"))
+;; Exercise 5. Please lookup big-bang in the Racket Help Desk (try to
+;; find it!) and answer the following questions:
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART III : big-bang ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Exercise 5. Please lookup big-bang in the documents (try to find it!) and
-;; answer the following questions to yourself:
-
-;; - How does the behavior of following code differ from what we have seen so
-;; far?
+;; - How would the behavior of following code snippet differ from what we
+;;   have seen so far?
 #;
 (big-bang WORLD0
-          [on-tick advance-world 5]
-          ...)
+  [on-tick advance-world 5]
+  ...)
 
-;; - How does the behavior of following code differ from what we have seen so
-;; far?
+;; - How would the behavior of following snippet differ from what we have
+;;   seen so far?
 #;
 (big-bang WORLD0
-          [to-draw paint-scene WIDTH HEIGHT]
-          ...)
+  [to-draw paint-scene WIDTH HEIGHT]
+  ...)
 
-;; - What does on-release do in the following code?
+;; - What would on-release do in the following code snippet? What kind
+;;   of situation might you use on-release for?
 #;
 (big-bang WORLD0
-          [on-release change-world-state]
-          ...)
+  [on-release change-world-state]
+  ...)
+
