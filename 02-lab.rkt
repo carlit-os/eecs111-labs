@@ -3,8 +3,8 @@
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 02-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PART I : Structs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 1. Please design a data definition, named Combination, to represent all
-;; possible orders of one ravioli filling with one sauce.
+;; Exercise 1. Please design a data definition, named Combination, to represent
+;; all possible orders of one ravioli filling with one sauce.
 ;;
 ;; Please follow the design recipe which includes:
 ;; - a description (signature) of Combination
@@ -20,9 +20,9 @@
 
 
 
-;; Exercise 2a. Please design a function, describe-order : Combination -> String,
-;; that computes a string description of a Combination following the example
-;; format in the check-expect below.
+;; Exercise 2a. Please design a function, describe-order : Combination ->
+;; String, that computes a string description of a Combination following the
+;; example format in the check-expect below.
 
 #| [YOUR CODE HERE] |#
 
