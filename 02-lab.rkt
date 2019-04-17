@@ -21,7 +21,7 @@
 
 
 
-;; Exercise 2a. Please design a function, describe-order : Combination ->
+;; Exercise 2. Please design a function, describe-order : Combination ->
 ;; String, that computes a string description of a Combination following the
 ;; example format in the check-expect below.
 
@@ -32,15 +32,6 @@
 (check-expect
  (describe-order (make-comb "butternut squash" "wild mushroom"))
  "This order is ravioli with butternut squash filling and wild mushroom sauce.")
-
-
-
-;; Exercise 2b. Evaluate the following expression step by step and write down
-;; next to each step whether it is arithmetic, plugging or cond.
-;;
-;;     (describe-order (make-comb "butternut squash" "wild mushroom"))
-;;
-;; Please refer to 09-stepping.rkt on the course webpage.
 
 
 
