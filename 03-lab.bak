@@ -39,7 +39,7 @@
 
 
 ;; Exercise 1.2.  What are the constructors, selectors and the structure
-;; predicates of the structs `cart` and `polr`?
+;; predicates the predicates of the structs `cart` and `polr`?
 ;; What are their signatures?
 
 #| [YOUR CODE HERE] |#
@@ -54,7 +54,7 @@
 ;; - "origin"
 
 ;; Exercise 2. What should be the interpretation of the Point data type?
-;; write a template (structural decomposition) to process the Point data type.
+;; write a template that process the Point data type.
 
 #| [YOUR CODE HERE] |#
 

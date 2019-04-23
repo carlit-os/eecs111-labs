@@ -49,7 +49,7 @@
 
 
 ; Exercise 1.2.  What are the constructors, selectors and the structure
-; predicates of the structs `cart` and `polr`?
+; predicates the predicates of the structs `cart` and `polr`?
 ; What are their signatures?
 
 ; The constructor of the cart struct is:
@@ -87,7 +87,7 @@
 ; - "origin"
 
 ; Exercise 2. What should be the interpretation of the Point data type?
-; write a template (structural decomposition) that processes the Point data type.
+; write a template that process the Point data type.
 
 ; The Point data type represents a point on the xy-plane. It is either the
 ; origin, or other points designated either by its cartesian coordinate
