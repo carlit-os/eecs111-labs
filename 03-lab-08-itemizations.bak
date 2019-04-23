@@ -45,7 +45,6 @@
 (define HOPPER-EX (make-hopper 50 10 8))
 (define TANK-CAR-EX (make-tank-car 50 5))
 (define PASSENGER-CAR-EX (make-passenger-car 80))
-(define THOMAS-THE-TANK "engine")
 
 ; process-traincar : TrainCar ... -> ...
 ; Template for TrainCar
@@ -154,7 +153,7 @@
               0)
 (check-expect (passenger-capacity (make-passenger-car 87))
               87)
-(check-expect (passenger-capacity THOMAS-THE-TANK)
+(check-expect (passenger-capacity "engine")
               1)
 
 
