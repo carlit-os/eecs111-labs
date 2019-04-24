@@ -1,33 +1,31 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 03-lab-08-itemizations) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;;;;; A freezable countdown timer ;;;;;
+;;;;; TWO TIMERS ;;;;
 
 (require 2htdp/universe)
 (require 2htdp/image)
 
-
-
+;                                                              
+;                                                              
+;                                                              
+;   ;;;;;;                                              ;;;    
+;   ;     ;                         ;                 ;;;;;    
+;   ;      ;                        ;                 ;  ;;    
+;   ;      ;    ;;;;;     ; ;;;   ;;;;;;                 ;;    
+;   ;      ;   ;    ;;    ;;   ;    ;                    ;;    
+;   ;     ;          ;    ;         ;                    ;;    
+;   ;;;;;;      ;;;;;;    ;         ;                    ;;    
+;   ;         ;;     ;    ;         ;                    ;;    
+;   ;         ;      ;    ;         ;                    ;;    
+;   ;         ;     ;;    ;         ;                    ;;    
+;   ;         ;;   ;;;    ;         ;                    ;;    
+;   ;          ;;;;; ;    ;          ;;;               ;;;;;;  
 ;                                                              
 ;                                                              
 ;                                                              
 ;                                                              
-;   ;;;;;;                           ;;                ;;;;;   
-;   ;;   ;;                          ;;               ;    ;;  
-;   ;;    ;;                         ;;                     ;; 
-;   ;;    ;;    ;;;;;     ;;  ;;   ;;;;;;;                  ;; 
-;   ;;    ;;   ;    ;;    ;;;;  ;    ;;                    ;;  
-;   ;;   ;;         ;;    ;;;        ;;                 ;;;    
-;   ;;;;;;      ;;;;;;    ;;         ;;                    ;;  
-;   ;;        ;;;   ;;    ;;         ;;                     ;; 
-;   ;;        ;;    ;;    ;;         ;;                     ;; 
-;   ;;        ;;    ;;    ;;         ;;                     ;; 
-;   ;;        ;;   ;;;    ;;         ;;               ;    ;;  
-;   ;;         ;;;; ;;    ;;          ;;;;             ;;;;;   
-;                                                              
-;                                                              
-;                                                              
-;                                                              
+                                                              
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; A Countdown Timer ;;;;;
@@ -48,6 +46,10 @@
   ... (hms-min t) ...
   ... (hms-sec t) ...)
 
+;;; Data examples ;;;
+
+(define EX-CDT-0  (make-hms 1 10 43))
+(define EX-CDT-7  (make-hms 1 10 36))
 
 ;;; Constants ;;;
 
@@ -97,10 +99,10 @@
 ;  - <0:00:00> should display as "0:00:00"
 ;
 ; Strategy: function composition
-(define (draw-timer t)
+(define (cdt-draw t)
   (text->scene (timer->text t)))
 
-(check-expect (draw-timer (make-hms 1 10 6))
+(check-expect (cdt-draw (make-hms 1 10 6))
               (overlay
                (text "1:10:06" TEXT-SIZE TEXT-COLOR)
                (empty-scene WIDTH HEIGHT)))
@@ -181,102 +183,157 @@
    (replicate (ceiling (/ i (string-length s))) s)
    0 i))
 
+; cdt-start : CDT -> CDT
+; Starts the counting timer at the given time.
+; To use, uncomment and call like this: (cdt-start WORLD0)
 #;
-(big-bang WORLD0
-  [to-draw draw-timer]
-  [on-tick decr 1])
+(define (cdt-start time0)
+  (big-bang time0
+    [to-draw draw-timer]
+    [on-tick decr 1]))
+
 
 ;                                                              
 ;                                                              
 ;                                                              
-;                                                              
-;   ;;;;;;                           ;;                    ;;  
-;   ;;   ;;                          ;;                   ;;;  
-;   ;;    ;;                         ;;                  ;;;;  
-;   ;;    ;;    ;;;;;     ;;  ;;   ;;;;;;;               ; ;;  
-;   ;;    ;;   ;    ;;    ;;;;  ;    ;;                 ;  ;;  
-;   ;;   ;;         ;;    ;;;        ;;                ;;  ;;  
-;   ;;;;;;      ;;;;;;    ;;         ;;                ;   ;;  
-;   ;;        ;;;   ;;    ;;         ;;               ;    ;;  
-;   ;;        ;;    ;;    ;;         ;;               ;;;;;;;;;
-;   ;;        ;;    ;;    ;;         ;;                    ;;  
-;   ;;        ;;   ;;;    ;;         ;;                    ;;  
-;   ;;         ;;;; ;;    ;;          ;;;;                 ;;  
-;                                                              
+;   ;;;;;;                                             ;;;;;   
+;   ;     ;                         ;                 ;;    ;  
+;   ;      ;                        ;                 ;      ; 
+;   ;      ;    ;;;;;     ; ;;;   ;;;;;;                     ; 
+;   ;      ;   ;    ;;    ;;   ;    ;                        ; 
+;   ;     ;          ;    ;         ;                       ;  
+;   ;;;;;;      ;;;;;;    ;         ;                      ;   
+;   ;         ;;     ;    ;         ;                     ;    
+;   ;         ;      ;    ;         ;                    ;     
+;   ;         ;     ;;    ;         ;                   ;      
+;   ;         ;;   ;;;    ;         ;                  ;;      
+;   ;          ;;;;; ;    ;          ;;;              ;;;;;;;; 
 ;                                                              
 ;                                                              
 ;                                                              
+;                                                              
+                                                             
 
-;;; Data Definitions ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;; A Freezable Countdown Timer ;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; A FCDT (freezable count-down timer) is one of:
-; - (make-running CDT)
-; - (make-frozen CDT CDT)
-; - (make-frozen2 CDT CDT CDT)
-
-; Interpretation:
-; - (make-running t) means that t is the time remaining
-; - (make-frozen t d) memoizes one record d and continue counting with t
-; - (make-frozen2 t d d2) memoizes two records d, d2 and continue counting with t
+; An FCDT is one of:
+;  - (make-running CDT)
+;  - (make-frozen CDT CDT)
+;
+; interp. if `t` is an FCDT then one of:
+;  - if (running? t) then (running-timer t) is the current timer, or
+;  - if (frozen? t) then both of:
+;     - (frozen-hidden t) is the hidden timer (still running), and
+;     - (frozen-visible t) is the displayed timer (frozen).
 (define-struct running (timer))
-(define-struct frozen (timer record))
-(define-struct frozen2 (timer record1 record2))
+(define-struct frozen (hidden visible))
 
-;; Template for FCDT
+; process-fcdt : FCDT ... -> ...
+; Template for FCDT.
 #;
 (define (process-fcdt t ...)
   (cond
-    [(running? t) ... (running-timer t) ...]
-    [(frozen? t)  ... (frozen-timer t) ...
-                  ... (frozen-record t) ...]
-    [(frozen2? t) ... (frozen2-timer t) ...
-                  ... (frozen2-record1 t) ...
-                  ... (frozen2-record2 t) ...]))
+    [(running? t)  ... (running-timer t) ...]
+    [(frozen? t)   ... (frozen-hidden t) ...
+                   ... (frozen-visible t) ...]))
 
+
+
+
+; Start out running:
+(define EX-FCDT/1 (make-running EX-CDT-0))
+; Hitting space splits into a hidden CDT that continues to
+; run and a visible one that's paused:
+(define EX-FCDT/2 (make-frozen EX-CDT-0 EX-CDT-0))
+; Seven seconds later the hidden CDT has advanced but the visible
+; CDT has not:
+(define EX-FCDT/3 (make-frozen EX-CDT-7 EX-CDT-0))
+; Hitting space again discards the visible, frozen CDT and retains
+; the CDT that continued to run while hidden:
+(define EX-FCDT/4 (make-running EX-CDT-7))
 
 ;;; Functions ;;;
 
-; update-fcdt : FCDT -> FCDT
-; Decrements a freezable cdt by one second
 
+; fcdt-visible : FCDT -> CDT
+; Extracts the CDT to display.
+;
+; Examples:
+(check-expect (fcdt-visible (make-running EX-CDT-0))
+              EX-CDT-0)
+(check-expect (fcdt-visible (make-frozen EX-CDT-7 EX-CDT-0))
+              EX-CDT-0)
+;
+; Strategy: struct decomp
+(define (fcdt-visible t)
+  (cond
+    [(running? t)   (running-timer t)]
+    [else           (frozen-visible t)]))
+
+
+; fcdt-running : FCDT -> CDT
+; Extracts the CDT that is current running.
+;
+; Examples:
+(check-expect (fcdt-running (make-running EX-CDT-0))
+              EX-CDT-0)
+(check-expect (fcdt-running (make-frozen EX-CDT-7 EX-CDT-0))
+              EX-CDT-7)
+;
+; Strategy: struct decomp
+(define (fcdt-running t)
+  (cond
+    [(running? t)   (running-timer t)]
+    [else           (frozen-hidden t)]))
+
+
+; fcdt-replace-running : FCDT CDT -> FCDT
+; Replaces the running timer in an FCDT with the given CDT.
+;
+; Examples:
+(check-expect (fcdt-replace-running (make-running EX-CDT-0)
+                                    (decr EX-CDT-0))
+              (make-running (decr EX-CDT-0)))
+(check-expect (fcdt-replace-running (make-frozen EX-CDT-7 EX-CDT-0)
+                                    (decr EX-CDT-7))
+              (make-frozen (decr EX-CDT-7) EX-CDT-0))
+;
+; Strategy: struct decomp
+(define (fcdt-replace-running ft t)
+  (cond
+    [(running? ft) (make-running t)]
+    [else          (make-frozen t (frozen-visible ft))]))
+
+
+; update-fcdt : FCDT -> FCDT
+; Decrements a freezable CDT by one second
+;
 ; Examples:
 ;  - (make-running <1:23:08>) => (make-running <1:23:07>)
 ;  - (make-frozen <1:23:08> <1:23:45>) => (make-frozen <1:23:07> <1:23:45>)
 
-; Strategy: struct. decomp.
+; Strategy: function composition
 (define (update-fcdt t)
-  (cond
-    [(running? t) (make-running (decr (running-timer t)))]
-    [(frozen? t)  (make-frozen (decr (frozen-timer t))
-                               (frozen-record t))]
-    [(frozen2? t)  (make-frozen2 (decr (frozen2-timer t))
-                                 (frozen2-record1 t)
-                                 (frozen2-record2 t))]))
+  (fcdt-replace-running t (decr (fcdt-running t))))
 
 (check-expect (update-fcdt (make-running (make-hms 1 23 8)))
               (make-running (make-hms 1 23 7)))
 (check-expect (update-fcdt (make-frozen (make-hms 1 23 8) (make-hms 1 24 0)))
               (make-frozen (make-hms 1 23 7) (make-hms 1 24 0)))
-(check-expect (update-fcdt (make-frozen2 (make-hms 1 23 8)
-                                         (make-hms 1 23 30)
-                                         (make-hms 1 24 0)))
-              (make-frozen2 (make-hms 1 23 7)
-                            (make-hms 1 23 30)
-                            (make-hms 1 24 0)))
 
 
-; handle-keys : FCDT KeyEvt -> FCDT
+; handle-keys : FCDT KeyEvent -> FCDT
 ; Freezes/thaws the timer on spacebar
 
 ; Examples:
 ;  - if key is " ", (make-running <1:23:08>)
 ;       => (make-frozen <1:23:08> <1:23:08>)
 ;  - if key is " ", (make-frozen <1:23:08> <1:23:45>)
-;       => (make-frozen2 <1:23:08> <1:23:08> <1:23:45>)
-;  - if key is " ", (make-frozen2 <1:23:08> <1:23:45> <5:33:17>)
-;       => (make-frozen2 <1:23:08> <1:23:08> <1:23:45>)
+;       => (make-running <1:23:08>)
 ;  - if key is anything else, no change
-
+;
 ; Strategy: struct. decomp.
 (define (handle-keys t ke)
   (cond
@@ -287,80 +344,52 @@
               (make-frozen (make-hms 1 23 8) (make-hms 1 23 8)))
 (check-expect (handle-keys (make-frozen (make-hms 1 23 8) (make-hms 2 23 8))
                            " ")
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 2 23 8)))
-(check-expect (handle-keys (make-frozen2 (make-hms 1 23 8)
-                                         (make-hms 2 23 8)
-                                         (make-hms 5 23 8))
-                           " ")
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 2 23 8)))
+              (make-running (make-hms 1 23 8)))
 (check-expect (handle-keys (make-running (make-hms 1 23 8)) "m")
               (make-running (make-hms 1 23 8)))
 
 
 ; toggle-fcdt : FCDT -> FCDT
 ; Freezes/thaws a timer.
-
+;
 ; Examples:
-(check-expect (toggle-fcdt
-               (make-running (make-hms 1 23 8)))
+(check-expect (toggle-fcdt (make-running (make-hms 1 23 8)))
               (make-frozen (make-hms 1 23 8) (make-hms 1 23 8)))
-(check-expect (toggle-fcdt
-               (make-frozen (make-hms 1 23 8) (make-hms 7 0 2)))
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 7 0 2)))
-(check-expect (toggle-fcdt
-               (make-frozen2 (make-hms 1 23 8) (make-hms 4 59 0) (make-hms 7 0 2)))
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 4 59 0)))
-
-
+(check-expect (toggle-fcdt (make-frozen (make-hms 1 23 8) (make-hms 7 0 2)))
+              (make-running (make-hms 1 23 8)))
+;
 ; Strategy: struct. decomp.
 (define (toggle-fcdt t)
   (cond
     [(running? t)
      (make-frozen (running-timer t) (running-timer t))]
     [(frozen? t)
-     (make-frozen2 (frozen-timer t) (frozen-timer t) (frozen-record t))]
-    [(frozen2? t)
-     (make-frozen2 (frozen2-timer t) (frozen2-timer t) (frozen2-record1 t))]))
+     (make-running (frozen-hidden t))]))
 
 
-; draw-fcdt : FCDT -> Scene
+; draw-fcdt : FCDT -> Image
 ; To render the state of the FCDT.
 ;
 ; Examples:
 ;  - (make-running <1:10:06>) => scene with "1:10:06"
-;  - (make-frozen <1:10:06> <1:13:45>) => scene with "1:10:06" and "1:13:45"
+;  - (make-frozen <1:13:45> <1:10:06>) => scene with "1:13:45"
+;
+; Strategy: function composition
+(define (fcdt-to-draw t)
+  (cdt-draw (fcdt-visible t)))
 
-; Strategy: struct. decomp.
-(define (draw-fcdt t)
-  (cond
-    [(running? t) (beside (draw-timer (running-timer t))
-                          (empty-scene WIDTH HEIGHT)
-                          (empty-scene WIDTH HEIGHT))]
-    [(frozen? t)  (beside (draw-timer (frozen-timer t))
-                          (draw-timer (frozen-record t))
-                          (empty-scene WIDTH HEIGHT))]
-    [(frozen2? t)  (beside (draw-timer (frozen2-timer t))
-                           (draw-timer (frozen2-record1 t))
-                           (draw-timer (frozen2-record2 t)))]))
-
-(check-expect (draw-fcdt (make-running (make-hms 1 10 6)))
-              (beside (text->scene "1:10:06")
-                      (empty-scene WIDTH HEIGHT)
-                      (empty-scene WIDTH HEIGHT)))
-(check-expect (draw-fcdt (make-frozen (make-hms 0 0 30) (make-hms 1 10 6)))
-              (beside (text->scene "0:00:30")
-                      (text->scene "1:10:06")
-                      (empty-scene WIDTH HEIGHT)))
-(check-expect (draw-fcdt (make-frozen2 (make-hms 0 0 0)
-                                       (make-hms 0 0 30)
-                                       (make-hms 1 10 6)))
-              (beside (text->scene "0:00:00")
-                      (text->scene "0:00:30")
-                      (text->scene "1:10:06")))
+(check-expect (fcdt-to-draw (make-running (make-hms 1 10 6)))
+              (text->scene "1:10:06"))
+(check-expect (fcdt-to-draw (make-frozen (make-hms 0 0 30) (make-hms 1 10 6)))
+              (text->scene "1:10:06"))
 
 
+; fcdt-start : CDT -> FCDT
+; Starts the freezable counting timer running at the given time.
+; To use, uncomment and call like this: (fcdt-start WORLD0)
 #;
-(big-bang (make-running WORLD0)
-  [on-tick update-fcdt 1]
-  [on-draw draw-fcdt]
-  [on-key handle-keys])
+(define (fcdt-start time0)
+  (big-bang (make-running time0)
+    [to-draw fcdt-to-draw]
+    [on-tick update-fcdt 1]  
+    [on-key  handle-keys]))
