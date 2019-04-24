@@ -1,49 +1,43 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
 #reader(lib "htdp-beginner-reader.ss" "lang")((modname 03-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
-;;;;;;;;;;;;;;;;;;;;;;;;; PART I : Structs Again ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;; PART I : Structs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; A NonnegativeNumber falls into the below interval:
-;; - A number greater than or equal to 0
+; A NonnegativeNumber is a Number in [0, +inf.0)
 
-
-;; A CartesianCoord is (make-cart Number Number)
+; A CartesianCoord is (make-cart Number Number)
 (define-struct cart (x y))
-;; interp. `x` and `y` represents the coordinate of a point on the x-y
-;; plane.
+; interp. (make-cart x y) represents the Cartesian point (x, y)
 
-
-;; A PolarCoord is (make-polr NonnegativeNumber Number)
+; A PolarCoord is (make-polr NonnegativeNumber Number)
 (define-struct polr (r theta))
-;; interp. `r` and `theta` represents the polar coordinate of a point
-;; on the x-y plane. `r` is the distance to the origin and `theta` is
-;; the angle between the point and the x-axis.
+; interp. if `p` is a PolarCoord then (polr-r p) is the distance from
+; the origin, and (polr-theta p) is the is the angle, counterclockwise,
+; between the point and the x-axis.
 
 ;; Note: a point with polar coordinate (r, θ) can be converted to and
-;; from the standard coordinate system (x, y) by the formulas
+;; from the standard coordinate system (x, y) by the formulae
 ;;
 ;;     x = r cos(θ)
 ;;     y = r sin(θ)
 ;;          __________
 ;;     r = √ x^2 + y^2
 ;;     θ = atan2(y, x)
+;;
 ;; (atan2 : https://en.wikipedia.org/wiki/Atan2#Definition_and_computation )
 ;;
 
 
-;; Exercise 1.1. Write the template for doing structural decomposition
-;; on CartesianCoord and PolarCoord.
+; Exercise 1.1. Write the templates for doing structural decomposition
+; on CartesianCoord and PolarCoord.
 
 #| [YOUR CODE HERE] |#
 
 
-
-;; Exercise 1.2.  What are the constructors, selectors and the structure
-;; predicates of the structs `cart` and `polr`?
-;; What are their signatures?
+; Exercise 1.2.  What are the constructors, selectors, and predicates
+; for the structs `cart` and `polr`?  What are their signatures?
 
 #| [YOUR CODE HERE] |#
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;; PART II : Itemization ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53,59 +47,124 @@
 ;; - (make-polr NonnegativeNumber Number)
 ;; - "origin"
 
-;; Exercise 2. What should be the interpretation of the Point data type?
-;; write a template (structural decomposition) to process the Point data type.
+; Exercise 2.1. Given an interpretation for the point data type.
 
+; #| [YOUR COMMENT HERE] |#
+
+
+; Exercise 2.2. Write a template (i.e., structural decomposition) for
+; processing the Point data type.
+
+; #| [YOUR COMMENT HERE] |#
+
+
+; Exercise 3. Design a function distance-to-origin that, when given a
+; Point, computes the distance between that Point and the origin.
 #| [YOUR CODE HERE] |#
 
 
+;;;;;;;;;;;;;;;;;;;;;;; PART III : Put Them Together ;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 3. Design a function distance-to-origin that, when given a Point,
-;; computes the distance between that Point and the origin.
+; 03-lab-timers.rkt contains implementations of two world programs, one
+; complete and one incomplete:
+;
+;  - Timer, started by running (start-timer WORLD0), displays a timer
+;    that counts down with hours, minutes, and second. It’s done for
+;    you.
 
-#| [YOUR CODE HERE] |#
+;  - FTimer, started by running (start-ftimer WORLD0), also display a
+;    timer counting down, and pressing the spacebar *appears* to stop it.
+;    But actually it keeps counting, even as it displays the time from
+;    when it was frozen, and prssing space again causes it to revert to
+;    displaying the countdown that was hidden.
+;
+; For example, suppose the timer displays 2:45:34. A second later you
+; press space, so it freezes at 2:45:33. Internally it keeps counting.
+; 12 seconds later it still shows 2:45:33, but when you press space
+; again it immediately shows 2:45:21 and continues counting downward.
 
 
+; Exercise 4.1.  Read the data definition for Timer (near the top of
+; Part 1 in 03-lab-timers.rkt). Once you understand it, consider these
+; four functions:
+;
+;  - decr-timer    : ???
+;  - to-draw-timer : ???
+;  - text->scene   : ???
+;  - timer->text   : ???
+;
+; Their signatures have been erased. Can you figure out what the
+; signatures should be? It may help to consider not only their names and
+; purposes, but also how they are used in both examples and from other
+; functions, and how they use their arguments internally.
 
-;;;;;;;;;;;;;;;;;;;;;;; PART III : put them together ;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Exercise 4. Remember the freezable countdown timer from 08-itemizations.rkt?
-;; Instead of having the timer freeze, let's change it to be a timer that can
-;; memoize at most two countdown records. Specifically, change the FCDT time
-;; to be this and update the template:
+; Exercise 4.2. Read the data definition for FTimer (near the top of
+; Part 2 in 03-lab-timers.rkt). Make sure you understand it, and then
+; make a template for it. Remember the process for making an itemization
+; template: 1) a `cond` with one clause per alternative in the D.D.; 2)
+; a test guarding each clause that recognizes the values of that
+; alternative; and 3) for each alternative that’s a struct, the
+; inventory of selector expressions on the right-hand size of the
+; corresponding cond clause.
 
-; A FCDT (freezable count-down timer) is one of:
-; - (make-running CDT)
-; - (make-frozen CDT CDT)
-; - (make-frozen2 CDT CDT CDT)
 
-; Interpretation:
-; - (make-running t) means that t is the time remaining
-; - (make-frozen t d) memoizes one record d and continue counting with t
-; - (make-frozen2 t d d2) memoizes two records d, d2 and continue counting with t
-(define-struct running (timer))
-(define-struct frozen (timer record))
-(define-struct frozen2 (timer record1 record2))
+; Exercise 4.3. FTimer can be written with very little code by mostly
+; reusing the functions from Timer. One way to understand this is by
+; factoring it into two groups of functions:
+;
+; 1) First, *Pseudo-selectors* and *pseudo-updaters* which are all about
+;    structural decomposition. Pseudo-selectors pretend to be selectors,
+;    but instead of selecting one field from one struct like real
+;    selectors (generated by define-struct) do, they can work on an
+;    itemization like FTimer instead. Here is one of the
+;    pseudo-selectors you will need:
+;
+;      ftimer-visible : FTimer -> Timer
+;      Selects the Timer that should be visible right now.
+;
+;    It sounds like a selector, but it isn’t really, because when you
+;    have an FTimer it might have one of two forms. In particular, if
+;    it's of the form (make-running t) then `t` is the Timer that’s
+;    visible, but if it’s in the form (make-frozen t1 t2) then `t2` is
+;    the timer that’s visible (and frozen). In the `running?` case the
+;    selector is `running-timer`, and in the `frozen?` case the
+;    selector is `frozen-visible`, so `ftimer-visible` has to call
+;    whichever of those applies.
+;
+;    The other pseudoselector is very similar, but when given a frozen
+;    timer it returns the other field (running but hidden, via
+;    `frozen-hidden`) instead:
+;
+;      ftimer-running : FTimer -> Timer
+;      Selects the Timer that is running right now.
+;
+;    A pseudo-updater replaces some part of one value with another. You
+;    need one of these, in order to replace the running Timer inside an
+;    FTimer:
+;
+;      ftimer-replace-running : FTimer Timer -> FTimer
+;      Replaces the running timer in an FTimer with the given Timer.
+;
+; 2) Now the two of the big-bang handlers we need, for to-draw and
+;    on-tick, can be written by composing the two pseudo-selectors and
+;    one pseudo-updater with the existing handlers from Timer:
+;
+;      to-draw-ftimer : FTimer -> Image
+;      (Draws the visible timer via `to-draw-timer`.)
+;
+;      decr-ftimer : FTimer -> FTimer
+;      (Decrements the running timer, via `decr-timer`.)
+;
+; Each of these five functions currently has a *stub body*, which is a
+; minimal expression that obeys the signature (by returning the right
+; class of data) but doesn’t actually do anything useful. (For example,
+; `decr-ftimer` currently returns the FTimer unchanged, and
+; `ftimer-visible` always returns (make-timer 1 10 43) regardless of its
+; arguments. Some of the tests continue to pass with the stubs, but says
+; more about the quality of the tests than the stubs.)
+;
+; Replace the stub bodies with real bodies that implement the
+; purposes correctly. Then uncomment the commented tests and make sure
+; your code passes.
 
-;; When the space key is pressed, memoize the current countdown time in the
-;; records field. Specifically, toggle-fcdt should put the time in the records
-;; instead of freezing or thawing the timer:
-#|
-Examples:
-
-(check-expect (toggle-fcdt
-               (make-running (make-hms 1 23 8)))
-              (make-frozen (make-hms 1 23 8) (make-hms 1 23 8)))
-
-(check-expect (toggle-fcdt
-               (make-frozen (make-hms 1 23 8) (make-hms 7 0 2)))
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 7 0 2)))
-
-(check-expect (toggle-fcdt
-               (make-frozen2 (make-hms 1 23 8) (make-hms 4 59 0) (make-hms 7 0 2)))
-              (make-frozen2 (make-hms 1 23 8) (make-hms 1 23 8) (make-hms 4 59 0)))
-|#
-
-;; The function update-fcdt for make-frozen2 works the same as for make-frozen.
-;; When drawing the timer in draw-fcdt, please show both the current time
-;; and records in the fields frozen-record, frozen2-record1 and frozen2-record2.
