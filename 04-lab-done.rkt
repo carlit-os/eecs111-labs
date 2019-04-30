@@ -37,7 +37,7 @@ a <Data_reuslt>.
 ; data definition?
 
 #|
-The ``syntax'' of a synonym data definition is:
+The ''syntax'' of a synonym data definition is:
 
     ; A <New-name> is a <Existing-data-definition-name>.
 
@@ -71,7 +71,7 @@ Syntax:
 Template:
 
     #;
-    (defiine (process-<new-name> enum-value ...)
+    (define (process-<new-name> enum-value ...)
       (cond
         [(<existing-data>=? enum-value <value_1>) ...]
         [(<existing-data>=? enum-value <value_2>) ...]
@@ -181,7 +181,8 @@ For example:
 ; How do you write the template for an itemization data definition
 ; if it is recursive?
 ;
-; Please give the template for processing Alpaca, defined below.
+; Please provide the constructor, predicate, and selectors for the Alpaca struct
+; then give the template for processing the Alpaca struct, defined below.
 
 ; A Sex is one of:
 ; - "female"
