@@ -200,6 +200,24 @@ For example:
 ; - "unknown"
 (define-struct alpaca [name sex dob color sire dam])
 
+
+; The constructor for the Alpaca struct:
+
+  ;(make-alpaca ...)
+
+; The predicate for the Alpaca struct:
+
+  ;(alpaca? ...)
+
+; The selectors for the Alpaca struct:
+  ;(alpaca-name ...)
+  ;(alpaca-sex ...)
+  ;(alpaca-dob ...)
+  ;(alpaca-color ...)
+  ;(alpaca-sire ...)
+  ;(alpaca-dam ...)
+
+
 ; For the description of all steps, see 10-recursion.rkt.
 ; ============================= step 1 =============================
 #;
