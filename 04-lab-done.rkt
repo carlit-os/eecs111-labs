@@ -181,8 +181,9 @@ For example:
 ; How do you write the template for an itemization data definition
 ; if it is recursive?
 ;
-; Please provide the constructor, predicate, and selectors for the Alpaca struct
-; then give the template for processing the Alpaca struct, defined below.
+; Please provide the constructor, predicate, and selectors for the Alpaca
+; struct then give the template for processing the Alpaca struct, defined
+; below.
 
 ; A Sex is one of:
 ; - "female"
