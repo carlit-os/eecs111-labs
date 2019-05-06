@@ -12,9 +12,10 @@ Syntax:
 
     <function-name> : <Data_1> <Data_2> ... <Data_n> -> <Data_result>
 
-The signatures, which is the second step, follows from the first step
-in design recipe. After analyzing that data we need and what data the
-function will be working on, we will know what <Data_i>s should be.
+The signatures, which is the second step of the design recipe, follows
+from the first step, which is the problem analysis. After analyzing
+the data we need and what data the function will be working on, we
+will know what <Data_i>s should be.
 
 The signature serves as a contract between the user and the provider
 of <function-name>.
@@ -25,8 +26,8 @@ _ensures_ that the call will results in a value in <Data_result>
 
 To the provider, this signature _ensures_ that all arguments that the
 function receives will be values in <Data_1> ... <Data_n> and therefore
-the function do not to check for values outside this range. This
-signature also _requires_ that the function return a value that is
+the function does not need to check for values outside this range. This
+signature also _requires_ that the function returns a value that is
 a <Data_reuslt>.
 |#
 
@@ -36,31 +37,21 @@ a <Data_reuslt>.
 ; Exercise 1a. What is a synonym data definition? How do you define a synonym
 ; data definition?
 
-#|
-The ``syntax'' of a synonym data definition is:
-
-    ; A <New-name> is a <Existing-data-definition-name>.
-
-<New-name> is just an alias of <Existing-data-definition-name>.
-They will be the same, including their values, their template (if it has one)
-and arithmetic operations.
-|#
-
 
 
 
 ; Exercise 1b. What is an enumeration data definition?
 ; What is the syntax of an enumeration data definition and
-; how to write a template?
+; how do you write a template for one?
 
 
 
 
 ; Exercise 1c. What is a structure data definition?
-; What is the syntax of an structure data definition and
-; how to write a template?
+; What is the syntax of a structure data definition and
+; how do you write a template for one?
 ;
-; What is the name of the constructor, predicate and
+; What are the names of the constructor, predicate and
 ; selectors of a struct?
 
 
@@ -68,7 +59,7 @@ and arithmetic operations.
 
 ; Exercise 1d. What is an itemization data definition?
 ; What is the syntax of an itemization data definition and
-; how to write a template?
+; how do you write a template for one?
 
 
 
