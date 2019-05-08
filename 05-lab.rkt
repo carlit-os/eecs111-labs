@@ -19,7 +19,6 @@
 ; A Sex is one of:
 ; - "female"
 ; - "male"
-; - "unlisted"
 ;
 ; A DoB is (make-date Year Month Day)
 ;   where
