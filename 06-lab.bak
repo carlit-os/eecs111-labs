@@ -68,31 +68,12 @@
 ;
 ; select-from-db-where-year-is : [List-of Class] Number -> [List-of Class]
 ; Compute the classes in given class list with the specified year.
-(define (select-from-db-where-year-is loc year)
-  (cond
-    [(empty? loc) '()]
-    [(cons? loc)
-     (if (equal? (class-year (first loc)) year)
-         (cons (first loc)
-               (select-from-db-where-year-is (rest loc) year))
-         (select-from-db-where-year-is (rest loc) year))]))
-
 ;
 ; select-name-from-db : [List-of Class] -> [List-of String]
 ; Compute the name of all courses.
-(define (select-name-from-db loc)
-  (cond
-    [(empty? loc) '()]
-    [(cons? loc) (cons (class-name (first loc))
-                       (select-name-from-db (rest loc)))]))
-
 ;
 ; select-name-from-db-where-year-is : [List-of Class] Number -> [List-of String]
 ; Compute the name of all courses with the specified year.
-
-(define (select-name-from-db-where-year-is loc year)
-  (select-name-from-db
-   (select-from-db-where-year-is loc year)))
 
 ; Exercise 2. Please reformulate the purpose of select-name-from-db in
 ; terms of '...'.
@@ -123,13 +104,12 @@
 
 
 
-; Exercise 3b. Design a function, where, that returns a function comparing
-; whether the specified field of a class satisfies a certain condition.
+; Exercise 3b. Design a function, where, that produce a function comparing
+; whether the specified field of a class satisfies certain condition.
 ;
-; To be precise, where takes three arguments: a class selector
-; (i.e. class-name), a comparison function, and a value to compare to.
-; `where` will return a function that tests whether a given class satisfies
-; the given condition.
+; To be precise, where takes three arguments: a selector of class,
+; a comparison function, and a value to compare to. `where` will return
+; a function that test whether a given class satisfies the given condition.
 
 ; where : [Class -> A] [A A -> Boolean] A -> [Class -> Boolean]
 ; Examples: see tests
@@ -150,7 +130,7 @@
 
 
 
-; Exercise 3c. Design a function select-cond, which returns classes that
+; Exercise 3c. Design a function select-cond selecting classes that
 ; satisfy the given condition, as an abstraction of the function
 ; select-from-db-where-year-is.
 
@@ -169,7 +149,7 @@
 
 
 
-; Exercise 4. Design our final function, select, that extracts the desired
+; Exercise 4. Design our final function, select, to extract the desired
 ; field from all classes that satisfy the given condition. This is our
 ; 'database query' function.
 
@@ -191,7 +171,6 @@
 
 ; Exercise 5. Please do Exercise 270.
 #|
-https://htdp.org/2019-02-24/part_three.html#%28counter._%28exercise
-._ex~3abuild-list1%29%29
+http://www.htdp.org/2018-01-06/Book/part_three.html
 #(counter._(exercise._ex~3abuild-list1))
 |#

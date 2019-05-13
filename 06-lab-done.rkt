@@ -186,7 +186,8 @@
 
 ; Exercise 5. Please do Exercise 270.
 #|
-http://www.htdp.org/2018-01-06/Book/part_three.html
+https://htdp.org/2019-02-24/part_three.html#%28counter
+._%28exercise._ex~3abuild-list1%29%29
 #(counter._(exercise._ex~3abuild-list1))
 |#
 
