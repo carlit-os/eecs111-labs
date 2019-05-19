@@ -1,6 +1,6 @@
 ;; The first three lines of this file were inserted by DrRacket. They record metadata
 ;; about the language level of this file in a form that our tools can easily process.
-#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 08-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 07-lab) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
 ;;;;;;;;;;;;;;;;;;;;;;;; PART X : Map, Filter, Foldr Again ;;;;;;;;;;;;;;;;;;;;;
 
 #|
@@ -23,7 +23,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._ch~3a3use%29
 ; - "8"
 ; - "9"
 
-; Exercise. Please design a function Dec-digits->numbers : [List-of Dec-digit] ->
+; Exercise 1 Please design a function Dec-digits->numbers : [List-of Dec-digit] ->
 ; [List-of Number] that converts a list of Dec-digits to a list of corresponding
 ; number. For example, (list "1" "2" "7") should become (list 1 2 7).
 
@@ -32,7 +32,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._ch~3a3use%29
 
 
 
-; Exercise. Please design a function non-zero-digits : [List-of Dec-digit] ->
+; Exercise 2 Please design a function non-zero-digits : [List-of Dec-digit] ->
 ; [List-of Dec-digit] that, when given a list of Dec-digit, removes all "0"s and
 ; leave only non-zero digits.
 
@@ -41,7 +41,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._ch~3a3use%29
 
 
 
-; Exercise. Please design a function non-zero-digits? : [List-of Dec-digit] ->
+; Exercise 3 Please design a function non-zero-digits? : [List-of Dec-digit] ->
 ; Boolean that, when given a list of Dec-digit, check whether all digits in
 ; the given list of Dec-digit are not "0".
 ;
@@ -52,7 +52,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._ch~3a3use%29
 
 
 
-; Exercise. Please design a function dec->number : [List-of Dec-digit] -> Number
+; Exercise 4 Please design a function dec->number : [List-of Dec-digit] -> Number
 ; that, given a list of Dec-digit, convert the entire list to a number using
 ; foldr or foldl. For example, (list "5" "3" "2") converts to 532.
 
@@ -67,7 +67,7 @@ Please review Part III, 16.4 for the usage of local.
 http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 |#
 
-; Exercise. Instead of implementing the above functions using top-level
+; Exercise 5 Instead of implementing the above functions using top-level
 ; helper functions or lambda functions, please rewrite these functions using
 ; the local expression.
 
@@ -124,7 +124,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 
 ;;;;;;;;;;;;;;;;;;;;;;;; PART Y : Mutual Recursion Again ;;;;;;;;;;;;;;;;;;;;;;;
 
-; Exercise. What are the steps to write a template for a struct whose fields do
+; Exercise 6 What are the steps to write a template for a struct whose fields do
 ; not reference the struct itself? Which step will be changed if some fields
 ; refer to the same data type again? How does this step change in order to
 ; process mutual recursive data types?
@@ -133,7 +133,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 
 
 
-; Example structure definitions. Can you write templates for all of them?
+; Example 7 structure definitions. Can you write templates for all of them?
 
 ; A Short-tree is one of
 ; - #false
@@ -164,7 +164,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 
 
 
-; Exercise. Please design a function total-data : Tall-family -> Number
+; Exercise 8 Please design a function total-data : Tall-family -> Number
 ; that compute the sum of all data in the given Tall-family (or 0 for
 ; #false).
 
@@ -191,7 +191,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 
 
 
-; Exercise. Given two numbers start and end, please generate all even numbers
+; Exercise 9 Given two numbers start and end, please generate all even numbers
 ; that are between start and end.
 ; start and end might or might not be even numbers.
 ;
@@ -205,7 +205,7 @@ http://www.htdp.org/2018-01-06/Book/part_three.html#%28part._sec~3aeval-local%29
 
 
 
-; Exercise. Given two numbers left and right, please generate all pairs
+; Exercise 10 Given two numbers left and right, please generate all pairs
 ; (list i j) such that left ≤ i, i ≤ j and j < right.
 ;
 ; What is trivial-problem? for this function?
